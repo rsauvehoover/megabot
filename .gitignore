@@ -1,3 +1,6 @@
+# Don't ever commit the authfile
+auth.json
+
 # Logs
 logs
 *.log

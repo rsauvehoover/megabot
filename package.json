@@ -1,0 +1,12 @@
+{
+  "name": "Megabot",
+  "version": "1.0.0",
+  "description": "Megachannel bot",
+  "main": "bot.js",
+  "author": "Jeff Cho",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "uws": "^99.0.0"
+  }
+}
