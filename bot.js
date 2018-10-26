@@ -81,8 +81,9 @@ client.on('message', msg => {
     
     var allRoles = msg.guild.roles;
     
+    allRoles.delete(findChannel(msg.guild, 'confirmed').id);
     
-    msg.member.removeRoles()
+    msg.member.removeRoles(allRoles)
       .then(console.log)
       .catch(console.error);
     
