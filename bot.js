@@ -194,7 +194,7 @@ client.on('message', msg => {
                           }
                         }
                         
-                        if (id != 0) {
+                        if (maxID != 0) {
                           msg.author.send(`You can find the profile from ${user} at: ${message[maxID].url}.`);
                         } else {
                           msg.reply('An error occurred.');
