@@ -230,8 +230,15 @@ client.on('message', msg => {
               .catch(console.error);
         }  
       } else {
-        // Not a mod
-        msg.reply('you are not worthy to wield the mighty cap.');
+        // Not a mod, user already capped
+        if (user.roles.has(duncerole.id)) {
+        
+          msg.reply(`${user} is already wearing ${duncerole} - not that you could wield the cap even if they weren't'!`)
+          
+        // Nod a mod, user not capped
+        } else {
+          msg.reply('you are not worthy to wield the mighty cap.');
+        }
       }
       
       return;
@@ -270,8 +277,15 @@ client.on('message', msg => {
         } 
       
       } else {
-        // Not a mod
-        msg.reply('you are not strong enough to discard the mighty cap.');
+        // Not a mod, user uncapped
+        if (!user.roles.has(duncerole.id)) {
+        
+          msg.reply(`How can you uncap someone who isn't wearing a cap to begin with? Reconsider your life choices.'`)
+        
+        // Not a mod, user capped
+        } else {
+          msg.reply('you are not strong enough to discard the mighty cap.');
+        }
       }
       
       return;
