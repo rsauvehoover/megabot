@@ -100,7 +100,7 @@ client.on('message', msg => {
       }
       
       if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
-        helpmod = '**Mod Commands**:\n\n' +
+        helpmod = '\n**Mod Commands**:\n\n' +
                   '\`!cap <@user>\`: Dunce Cap the mentioned @user.\n' +
                   '\`!uncap <@user>\`: Remove the Dunce Cap from the mentioned @user.\n' + 
                   '\`!setname <@user> <desired username>\`: set @user\'s display name to <desired username>.\n';
@@ -242,6 +242,11 @@ client.on('message', msg => {
         
       if (args.length > 1) {
       
+        if (sender.roles.find('name', adminrole)) {
+          msg.reply('Admins must change their names manually.');
+          return;
+        }
+      
         var nickname = msg.content.substring(cmd.length + 2); 
       
         sender.setNickname(nickname)
@@ -263,6 +268,11 @@ client.on('message', msg => {
         var user = msg.mentions.members.first();
         if (!user || args.length < 3) {
           msg.reply('Check your syntax: \`!setname <@user> <desired username>\`.');
+          return;
+        }
+        
+        if (user.roles.find('name', adminrole)) {
+          msg.reply('You cannot set an admin\'s username.');
           return;
         }
         
