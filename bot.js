@@ -214,6 +214,9 @@ client.on('message', msg => {
               .catch(console.error);
         
         return;
+      } else {
+        console.log('Not an attempt to cap Admin');
+        console.log(user.username);
       }
     
       if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
