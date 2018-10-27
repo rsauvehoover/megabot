@@ -186,16 +186,16 @@ client.on('message', msg => {
                           return;
                         }
                     
-                        var id = 0;
+                        var maxID = 0;
                     
                         for (var [id, m] of message) {
-                          if (id > id) {
-                            id = id;
+                          if (id > maxID) {
+                            maxID = id;
                           }
                         }
                         
                         if (id != 0) {
-                          msg.author.send(`You can find the profile from ${user} at: ${message[id].url}.`);
+                          msg.author.send(`You can find the profile from ${user} at: ${message[maxID].url}.`);
                         } else {
                           msg.reply('An error occurred.');
                         }
