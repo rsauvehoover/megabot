@@ -230,10 +230,15 @@ client.on('message', msg => {
               .catch(console.error);
         }  
       } else {
+      
+        var user = msg.mentions.members.first();
+        var duncerole = sender.guild.roles.find(role => 
+                                        role.name.split(' ').includes('Dunce'));
+      
         // Not a mod, user already capped
         if (user.roles.has(duncerole.id)) {
-        
-          msg.reply(`${user} is already wearing ${duncerole} - not that you could wield the cap even if they weren't'!`)
+                
+          msg.reply(`${user} is already wearing ${duncerole} - not that you could wield the cap even if they weren't'!`);
           
         // Nod a mod, user not capped
         } else {
@@ -277,10 +282,15 @@ client.on('message', msg => {
         } 
       
       } else {
+        
+        var user = msg.mentions.members.first();
+        var duncerole = sender.guild.roles.find(role => 
+                                      role.name.split(' ').includes('Dunce'));
+      
         // Not a mod, user uncapped
         if (!user.roles.has(duncerole.id)) {
         
-          msg.reply(`How can you uncap someone who isn't wearing a cap to begin with? Reconsider your life choices.'`)
+          msg.reply(`How can you uncap someone who isn't wearing a cap to begin with? Reconsider your life choices.'`);
         
         // Not a mod, user capped
         } else {
