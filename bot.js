@@ -96,7 +96,6 @@ client.on('message', msg => {
                   '\`!course <course>\`: set yourself as being in <course> (one per command) so you can be mentioned using @<course>. You can have as many <course>s as you want. If you enter a <course> that you already have, it will be removed.\n' + 
                   '\tCourses: any currently listed in the Courses channel group - include the dash between subject and course code.\n' +
                   '\`!invite\`: receive a PM with the invite link to the Megachannel.\n' + 
-                  '\`!nickname <desired username>\`: set your display name to <desired username>.\n';
       }
       
       if ((sender.roles.find(role => role.name === modrole)) || 
@@ -111,7 +110,7 @@ client.on('message', msg => {
     }
   
     //
-    // Reset Permissions to Confirmed - WARNING MODS!
+    // Reset Permissions to Confirmed
     else if (cmd == 'reset' && isConfirmed) {
     
       for (var [id, role] of msg.guild.roles) {
@@ -235,29 +234,6 @@ client.on('message', msg => {
                   '\t2. Please don\'t invite anyone who is intolerant or obnoxious; and\n' +
                   '\t3. You take responsibility for anyone you invite to the server.\n' +
                   'With that in mind, use this invite link: http://megachannel.jeffcho.com.');
-    }
-    
-    //
-    // Rename yourself
-    else if (cmd == 'nickname') {
-        
-      if (args.length > 1) {
-      
-        if (sender.roles.find(role => role.name === adminrole)) {
-          msg.reply('Admins must change their names manually.');
-          return;
-        }
-      
-        var nickname = msg.content.substring(cmd.length + 2); 
-      
-        sender.setNickname(nickname)
-              .then(notificationschan.send(`${sender} has changed their display name to \`${nickname}\`!`))
-              .catch(console.error);
-        
-      } else {
-        msg.reply('Please check your syntax. The command usage is \`!setname <desired username>\`.')
-      }
-    
     }
     
     //
