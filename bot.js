@@ -195,7 +195,14 @@ client.on('message', msg => {
                         }
                         
                         if (maxID != 0) {
-                          msg.author.send(`You can find the profile from ${user} at: ${message.get(maxID).url}.`);
+                          var profilemessage = message.get(maxID);
+                          if (!profilemessage) {
+                            msg.reply("Profile error.");
+                            return;
+                          }
+                          
+                          msg.author.send(`You can find the profile from ${user} at: ${profilemessage.url}.`);
+                          
                         } else {
                           msg.reply('An error occurred.');
                         }
