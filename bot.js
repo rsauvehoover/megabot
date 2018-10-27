@@ -50,7 +50,7 @@ client.on('message', msg => {
     var isNew = sender.roles.find('name', 'new');
     var isConfirmed = sender.roles.find('name', 'confirmed');
 
-    const generalchan = findChannel(msg.guild, 'general');
+    const notificationschan = findChannel(msg.guild, 'notifications');
     const welcomechan = findChannel(msg.guild, 'welcome');
     const reqchan = findChannel(msg.guild, 'requests');
     const profileschan = findChannel(msg.guild, 'profiles');
@@ -69,7 +69,7 @@ client.on('message', msg => {
         
         sender.send('You have agreed to the rules of the Megachannel! Please make sure you check back often to keep up-to-date with changes. \n\nYou can now use any publicly-available channel; for example, you don\'t have to be taking the course that corresponds to a course channel in order to chat there.  Feel free to head over to the ' + profileschan.toString() + ' channel and introduce yourself - this is handy because the Megachannel has users who are in different programs and courses who might not know each other! You can also add any courses or game developer roles to yourself - type \`!help\` in a public channel to see all available bot commands. \n\nLastly, you may want to mute any channels you\'re not particularly interested in, as we can get into spirited discussions that can blow up your notifications.');
       
-        generalchan.send(`Please welcome our newest member ${msg.member} to the Megachannel!`);
+        notificationschan.send(`Please welcome our newest member ${msg.member} to the Megachannel!`);
       
       } else {
         sender.send('You have already agreed to the rules on this server.')
@@ -138,7 +138,7 @@ client.on('message', msg => {
           
             sender.removeRole(findRole(msg.guild, role))
               .then(sender.send(`The ${cmd} '${role}' was removed. You will no longer be notified when \`@${role}\` is mentioned.`))
-              .then(generalchan.send(`${sender} has removed themselves from \`@${role}\`.`))
+              .then(notificationschan.send(`${sender} has removed themselves from \`@${role}\`.`))
               .catch(console.error);
           
           // Doesn't have role - add it
@@ -146,7 +146,7 @@ client.on('message', msg => {
           
             sender.addRole(findRole(msg.guild, role))
               .then(sender.send(`The ${cmd} '${role}' was added. You will now be notified when someone mentions \`@${role}\`.`))
-              .then(generalchan.send(`${sender} has added themselves to \`@${role}\`.`))
+              .then(notificationschan.send(`${sender} has added themselves to \`@${role}\`.`))
               .catch(console.error);
           }
           
@@ -241,7 +241,7 @@ client.on('message', msg => {
               .then(console.log(`${user} dunce capped by ${sender}.`))
               .then(user.send('You have been dunce capped for violating a rule. While you are dunce capped, you will not be able to send messages, but you will be able to add reactions to other users\' messages. The offending violation must be remediated, and your dunce cap will wear off after a certain amount of time.'))
               .then(staffchannel.send(`${user} has been dunce capped by ${sender} in ${msg.channel}!`))
-              .then(generalchan.send(`${user} has been dunce capped by ${sender}!`))
+              .then(notificationschan.send(`${user} has been dunce capped by ${sender}!`))
               .catch(console.error);
         }  
       } else {
@@ -291,7 +291,7 @@ client.on('message', msg => {
           user.removeRole(duncerole)
             .then(console.log(`${user} uncapped by ${sender}.`))
             .then(user.send('Your Dunce Cap is lifted.'))
-            .then(generalchan.send(`${user} has been uncapped by ${sender}!`))
+            .then(notificationschan.send(`${user} has been uncapped by ${sender}!`))
             .then(staffchannel.send(`${user} has been uncapped by ${sender} in ${msg.channel}!`))
             .catch(console.error);
         } 
