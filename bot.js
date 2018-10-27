@@ -172,7 +172,7 @@ client.on('message', msg => {
         var user = msg.mentions.members.first();
         
         if (!user) {
-          msg.reply('Invalid command.');
+          msg.reply('check your `!profile` syntax. The user must be @mentioned.');
           return;
         }
         
@@ -195,7 +195,7 @@ client.on('message', msg => {
                         }
                         
                         if (maxID != 0) {
-                          msg.author.send(`You can find the profile from ${user} at: ${message[maxID].url}.`);
+                          msg.author.send(`You can find the profile from ${user} at: ${message.get(maxID).url}.`);
                         } else {
                           msg.reply('An error occurred.');
                         }
