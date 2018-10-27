@@ -220,7 +220,11 @@ client.on('message', msg => {
     // Get invite link
     else if (cmd == 'invite') {
     
-      sender.send('Use this invite link: http://megachannel.jeffcho.com.');
+      sender.send('Before sending out invitations to other users, please keep in mind:\n' +
+                  '\t1. This server is primarily for people in the Game Development certificate;\n' +
+                  '\t2. Please don\'t invite anyone who is intolerant or obnoxious; and\n' +
+                  '\t3. You take responsibility for anyone you invite to the server.\n'
+                  'With that in mind, use this invite link: http://megachannel.jeffcho.com.');
     }
     
     //
