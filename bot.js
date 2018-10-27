@@ -194,7 +194,11 @@ client.on('message', msg => {
                           }
                         }
                         
-                        msg.author.send(`You can find the profile from ${user} at: ${message[id].url}.`);
+                        if (id != 0) {
+                          msg.author.send(`You can find the profile from ${user} at: ${message[id].url}.`);
+                        } else {
+                          msg.reply('An error occurred.');
+                        }
                       })
                       .catch(console.error);
                     
