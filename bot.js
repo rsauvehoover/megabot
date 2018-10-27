@@ -4,9 +4,9 @@ var auth = require('./auth.json');
 //
 // Server variables
 //
-var channelroles = ['artist', 'director', 'dev', 
+const channelroles = ['artist', 'director', 'developer', 
                     'musician', 'producer', 'writer']; 
-var courseroles = ['blaw-301', 'cmput-250', 'cmput-366', 'mlcs-399'];
+const courseroles = ['blaw-301', 'cmput-250', 'cmput-366', 'mlcs-399'];
 
 // Initialize Discord Bot and log initialization
 var client = new Discord.Client();
@@ -83,7 +83,7 @@ client.on('message', msg => {
       } else {
         helptext = '\`!profile <@user>\`: find link to user\'s profile\n' +
                   '\`!role <role>\`: set yourself as <role> (one per command) so you can be mentioned using @<role>. You can have as many <role>s as you want. If you enter a <role> that you already have, it will be removed.\n' +
-                  '\tRoles: artist, director, dev, musician, producer, writer\n' +
+                  '\tRoles: artist, director, developer, musician, producer, writer\n' +
                   '\`!course <course>\`: set yourself as being in <course> (one per command) so you can be mentioned using @<course>. You can have as many <course>s as you want. If you enter a <course> that you already have, it will be removed.\n' + 
                   '\tCourses: any currently listed in the Courses channel group\n';
       }
@@ -146,7 +146,7 @@ client.on('message', msg => {
         } else {
         
           if (cmd == 'role') {
-            sender.send("The command must be of the format: \`!role <rolename>\` where <rolename> can be artist, director, dev, musician, producer, or writer.");
+            sender.send("The command must be of the format: \`!role <rolename>\` where <rolename> can be artist, director, developer, musician, producer, or writer.");
           } else if (cmd == 'course') {
             sender.send("The command must be of the format: \`!course <coursename>\` where <coursename> must match one of the course channel names.");
           }
