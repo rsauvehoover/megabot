@@ -202,11 +202,19 @@ client.on('message', msg => {
     // Cap
     else if (cmd == 'cap') {
     
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
-
-        var user = msg.mentions.members.first();
-        var duncerole = sender.guild.roles.find(role => 
+      var user = msg.mentions.members.first();
+      var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
+                                      
+      if (user && user.roles.has(adminrole)) {
+        sender.addrole(duncerole)
+              .then(console.log(`${sender} attempted to cap the Admin!`))
+              .then(msg.reply(`Trying to cap ${user}? You've been hoisted by your own petard!`))
+              .then(staffchannel.send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
+              .catch(console.error);
+      }
+    
+      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
         
         // Mod but command incorrect
         if (!user) {
@@ -253,11 +261,11 @@ client.on('message', msg => {
     // Uncap
     else if (cmd == 'uncap') {
     
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
-
-        var user = msg.mentions.members.first();
-        var duncerole = sender.guild.roles.find(role => 
+      var user = msg.mentions.members.first();
+      var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
+    
+      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
 
         // Mod but command incorrect
         if (!user) {
