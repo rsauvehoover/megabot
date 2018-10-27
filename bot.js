@@ -5,13 +5,10 @@ var channelroles = ['artist', 'director', 'dev',
                     'musician', 'producer', 'writer']; 
 var courseroles = ['blaw-301', 'cmput-250', 'cmput-366', 'mlcs-399'];
 
-// Initialize Discord Bot
+// Initialize Discord Bot and log initialization
 var client = new Discord.Client();
-
-// Log bot initialization
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-//     console.log(client)
 });
 
 // Find and return a role, if it exists
@@ -76,11 +73,10 @@ client.on('message', msg => {
       
       if (msg.channel == welcomechan && isNew) {
         sender.removeRole(findRole(msg.guild, 'new'))
-          .then(console.log)
           .catch(console.error);
       
         sender.addRole(findRole(msg.guild, 'confirmed'))
-          .then(console.log)
+          .then(console.log(`New member ${sender.username}`))
           .catch(console.error);
         
         sender.send('You have agreed to the rules of this server! Please make sure you check back often to keep up-to-date with changes. \n\nYou can now use any publicly-available channel; for example, you don\'t have to be taking the course that corresponds to a course channel in order to chat there.  Feel free to head over to the ' + profileschan.toString() + ' channel and introduce yourself - this is handy because the Megachannel has users who are in different programs and courses who might not know each other!  \n\nLastly, you may want to mute any channels you\'re not particularly interested in, as we can get into spirited discussions that can blow up your notifications.');
@@ -93,7 +89,7 @@ client.on('message', msg => {
     }
   
     // Help Message
-    if (cmd == 'help') {
+    else if (cmd == 'help') {
     
       var helpheader = 'You can use the following commands (replace anything in <angle brackets> with an argument - e.g. type \`!profile @MegaBot\`, not \`!profile <@MegaBot>\\`):\n\n' +
                         '\`!help\`: show this help message\n';
@@ -101,11 +97,9 @@ client.on('message', msg => {
       var helptext = '';
     
       if (isNew) {
-      
         helptext = '\`!agree\`: Agree to the rules of the server.';
       
       } else {
-        
         helptext = '\`!profile <@user>\`: find link to user\'s profile\n' +
                   '\`!role <role>\`: set yourself as <role> (one per command) so you can be mentioned using @<role>. You can have as many <role>s as you want. If you enter a <role> that you already have, it will be removed.\n' +
                   '\tRoles: artist, director, dev, musician, producer, writer\n' +
