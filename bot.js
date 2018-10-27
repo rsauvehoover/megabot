@@ -206,12 +206,14 @@ client.on('message', msg => {
       var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
                                       
-      if (user && user.roles.has(adminrole)) {
+      if (user && user.roles.has(adminrole.id)) {
         sender.addrole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
               .then(msg.reply(`Trying to cap ${user}? You've been hoisted by your own petard!`))
               .then(staffchannel.send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
               .catch(console.error);
+        
+        return;
       }
     
       if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
