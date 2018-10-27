@@ -84,12 +84,13 @@ client.on('message', msg => {
                         '\`!help\`: show this help message\n';
       
       var helptext = '';
+      var helpmod = '';
     
       if (isNew) {
         helptext = '\`!agree\`: Agree to the rules of the server.';
       
       } else {
-        helptext = '\`!profile <@user>\`: find link to user\'s profile\n' +
+        helptext = '\`!profile <@user>\`: find link to user\'s profile.\n' +
                   '\`!role <role>\`: set yourself as <role> (one per command) so you can be mentioned using @<role>. You can have as many <role>s as you want. If you enter a <role> that you already have, it will be removed.\n' +
                   '\tRoles: ' + channelroles.join(', ') + '\n' +
                   '\`!course <course>\`: set yourself as being in <course> (one per command) so you can be mentioned using @<course>. You can have as many <course>s as you want. If you enter a <course> that you already have, it will be removed.\n' + 
@@ -98,7 +99,14 @@ client.on('message', msg => {
                   '\`!nickname <desired username>\`: set your display name to <desired username>.\n';
       }
       
-      sender.send(helpheader + helptext);
+      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+        helpmod = '**Mod Commands**:\n\n' +
+                  '\`!cap <@user>\`: Dunce Cap the mentioned @user.\n' +
+                  '\`!uncap <@user>\`: Remove the Dunce Cap from the mentioned @user.\n' + 
+                  '\`!setname <@user> <desired username>\`: set @user\'s display name to <desired username>.\n';
+      }
+      
+      sender.send(helpheader + helptext + helpmod);
     }
   
     //
