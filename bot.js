@@ -205,8 +205,10 @@ client.on('message', msg => {
       var user = msg.mentions.members.first();
       var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
+      var admin = sender.guild.roles.find(role =>
+                                      role.name.split(' ').includes(adminrole))
                                       
-      if (user && user.roles.has(adminrole.id)) {
+      if (user && user.roles.find(admin)) {
         sender.addrole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
               .then(msg.reply(`Trying to cap ${user}? You've been hoisted by your own petard!`))
