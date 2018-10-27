@@ -219,8 +219,7 @@ client.on('message', msg => {
     // Get invite link
     else if (cmd == 'invite') {
     
-      sender.send('Use this invite link: http://megachannel.jeffcho.com.')
-    
+      sender.send('Use this invite link: http://megachannel.jeffcho.com.');
     }
     
     //
