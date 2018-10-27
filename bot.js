@@ -197,7 +197,7 @@ client.on('message', msg => {
                         if (maxID != 0) {
                           var profilemessage = message.get(maxID);
                           if (!profilemessage) {
-                            msg.reply("Profile error.");
+                            msg.reply("Something went wrong trying to retrieve the profile.");
                             return;
                           }
                           
