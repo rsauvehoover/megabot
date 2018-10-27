@@ -209,11 +209,12 @@ client.on('message', msg => {
       if (user && user.roles.find('name', adminrole)) {
         sender.addRole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
-              .then(msg.reply(`Trying to cap ${user}? Hoisted by your own petard!`))
-              .then(staffchannel.send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
+              .then(msg.reply(`you have been capped for trying to cap ${user} - hoisted by your own petard!`))
+              .then(findChannel(msg.guild, 'staff').send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
               .catch(console.error);
         
         return;
+        
       } else {
         console.log('Not an attempt to cap Admin');
         console.log(user.username);
