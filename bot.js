@@ -234,9 +234,11 @@ client.on('message', msg => {
       if (args.length > 1) {
       
         var nickname = message.content.substring(cmd.length + 2);
+        console.log(nickname);
       
-        sender.setNickname(nickname);
-        notificationschan.send(`${user} has changed their display name to ${nickname}!`);
+        sender.setNickname(nickname)
+              .then(notificationschan.send(`${user} has changed their display name to ${nickname}!`))
+              .catch(console.error);
         
       } else {
         msg.reply('Please check your syntax. The command usage is \`!setname <desired username>\`.')
