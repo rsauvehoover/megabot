@@ -209,6 +209,7 @@ client.on('message', msg => {
       if (user && user.roles.find('name', adminrole)) {
         sender.addRole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
+              .then(sender.send('You have been dunce capped for attempting to dunce cap the server admin. While you are dunce capped, you will not be able to send messages, but you will be able to add reactions to other users\' messages. Your dunce cap will wear off after a certain amount of time.'))
               .then(msg.reply(`you have been capped for trying to cap ${user} - hoisted by your own petard!`))
               .then(findChannel(msg.guild, 'staff').send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
               .catch(console.error);
