@@ -207,7 +207,7 @@ client.on('message', msg => {
                                       role.name.split(' ').includes('Dunce'));
 
       if (user && user.roles.find('name', adminrole)) {
-        sender.addrole(duncerole)
+        sender.addRole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
               .then(msg.reply(`Trying to cap ${user}? Hoisted by your own petard!`))
               .then(staffchannel.send(`${sender} has been capped by MegaBot for attempting to cap {$user}!`))
