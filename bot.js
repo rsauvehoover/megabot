@@ -1,6 +1,9 @@
 var Discord = require('discord.js');
 var auth = require('./auth.json');
 
+//
+// Server variables
+//
 var channelroles = ['artist', 'director', 'dev', 
                     'musician', 'producer', 'writer']; 
 var courseroles = ['blaw-301', 'cmput-250', 'cmput-366', 'mlcs-399'];
@@ -10,30 +13,6 @@ var client = new Discord.Client();
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
-
-// Find and return a role, if it exists
-//    Args:
-//      guild (Guild)
-//      rolename (String)
-//
-//    Returns:
-//      role (Role)
-//      The role reference for the guild if found.
-function findRole(guild, rolename) {
-  return guild.roles.find(role => role.name === rolename);
-}
-
-// Find and return a channel, if it exists
-//    Args:
-//      guild (Guild)
-//      channelname (String)
-//
-//    Returns:
-//      channel (Channel)
-//      The channel reference for the guild if found.
-function findChannel(guild, channelname) {
-  return guild.channels.find(ch => ch.name === channelname);
-}
 
 //
 // Handle new joins
@@ -68,6 +47,7 @@ client.on('message', msg => {
     const reqchan = findChannel(msg.guild, 'requests');
     const profileschan = findChannel(msg.guild, 'profiles');
     
+    //
     // New Member Agreement - on welcome channel, role new
     if (cmd == 'agree') {
       
@@ -88,6 +68,7 @@ client.on('message', msg => {
       }
     }
   
+    //
     // Help Message
     else if (cmd == 'help') {
     
@@ -110,6 +91,7 @@ client.on('message', msg => {
       msg.author.send(helpheader + helptext);
     }
   
+    //
     // Reset Permissions to Confirmed
     else if (cmd == 'reset' && isConfirmed) {
     
@@ -125,7 +107,8 @@ client.on('message', msg => {
 
     }
     
-    // Toggle role
+    //
+    // Toggle role or course
     else if (cmd == 'role' || cmd == 'course') {
     
       if (isConfirmed) {
@@ -171,6 +154,7 @@ client.on('message', msg => {
       }
     }
   
+    //
     // Get Profile
     else if (cmd == 'profile') {
     
@@ -206,5 +190,31 @@ client.on('message', msg => {
   } 
 });
 
+//
 // Client login
+//
 client.login(auth.token);
+
+// Find and return a role, if it exists
+//    Args:
+//      guild (Guild)
+//      rolename (String)
+//
+//    Returns:
+//      role (Role)
+//      The role reference for the guild if found.
+function findRole(guild, rolename) {
+  return guild.roles.find(role => role.name === rolename);
+}
+
+// Find and return a channel, if it exists
+//    Args:
+//      guild (Guild)
+//      channelname (String)
+//
+//    Returns:
+//      channel (Channel)
+//      The channel reference for the guild if found.
+function findChannel(guild, channelname) {
+  return guild.channels.find(ch => ch.name === channelname);
+}
