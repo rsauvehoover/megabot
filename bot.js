@@ -208,19 +208,19 @@ client.on('message', msg => {
                         }
                       })
                       .catch(console.error);
-
-      //
-      // Get invite link
-      else if (cmd == 'invite') {
-      
-        sender.send('Use this invite link: http://megachannel.jeffcho.com.')
-      
-      }
                     
       // Non-confirmed members get an error message for now.                    
       } else {
         msg.author.send("You must agree to the rules to view any profiles.");
       }    
+    }
+    
+    //
+    // Get invite link
+    else if (cmd == 'invite') {
+    
+      sender.send('Use this invite link: http://megachannel.jeffcho.com.')
+    
     }
     
     //
