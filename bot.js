@@ -95,7 +95,7 @@ client.on('message', msg => {
                   '\tRoles: ' + channelroles.join(', ') + '\n' +
                   '\`!course <course>\`: set yourself as being in <course> (one per command) so you can be mentioned using @<course>. You can have as many <course>s as you want. If you enter a <course> that you already have, it will be removed.\n' + 
                   '\tCourses: any currently listed in the Courses channel group - include the dash between subject and course code.\n' +
-                  '\`!invite\`: receive a PM with the invite link to the Megachannel.\n' + 
+                  '\`!invite\`: receive a PM with the invite link to the Megachannel.\n'; 
       }
       
       if ((sender.roles.find(role => role.name === modrole)) || 
