@@ -64,7 +64,7 @@ client.on('message', msg => {
           .catch(console.error);
       
         sender.addRole(findRole(msg.guild, 'confirmed'))
-          .then(console.log(`New member ${sender.username}`))
+          .then(console.log(`New member ${sender}`))
           .catch(console.error);
         
         sender.send('You have agreed to the rules of the Megachannel! Please make sure you check back often to keep up-to-date with changes. \n\nYou can now use any publicly-available channel; for example, you don\'t have to be taking the course that corresponds to a course channel in order to chat there.  Feel free to head over to the ' + profileschan.toString() + ' channel and introduce yourself - this is handy because the Megachannel has users who are in different programs and courses who might not know each other! You can also add any courses or game developer roles to yourself - type \`!help\` in a public channel to see all available bot commands. \n\nLastly, you may want to mute any channels you\'re not particularly interested in, as we can get into spirited discussions that can blow up your notifications.');
