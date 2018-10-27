@@ -170,6 +170,12 @@ client.on('message', msg => {
       if (isConfirmed) {
     
         var user = msg.mentions.members.first();
+        
+        if (!user) {
+          msg.reply('Invalid command.');
+          return;
+        }
+        
         var profile = profileschan.fetchMessages()
                       .then(messages => 
                           messages.filter(m => m.author.id === user.id))
