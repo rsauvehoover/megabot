@@ -228,6 +228,23 @@ client.on('message', msg => {
     }
     
     //
+    // Rename yourself
+    else if (cmd == 'setname') {
+    
+      if (args.length > 1) {
+      
+        var nickname = message.content.substring(cmd.length + 2);
+      
+        sender.setNickname(nickname);
+        notificationschan.send(`${user} has changed their display name to ${nickname}!`);
+        
+      } else {
+        msg.reply('Please check your syntax. The command usage is \`!setname <desired username>\`.')
+      }
+    
+    }
+    
+    //
     // Cap
     else if (cmd == 'cap') {
     
