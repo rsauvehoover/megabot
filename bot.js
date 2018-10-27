@@ -94,7 +94,8 @@ client.on('message', msg => {
                   '\tRoles: ' + channelroles.join(', ') + '\n' +
                   '\`!course <course>\`: set yourself as being in <course> (one per command) so you can be mentioned using @<course>. You can have as many <course>s as you want. If you enter a <course> that you already have, it will be removed.\n' + 
                   '\tCourses: any currently listed in the Courses channel group - include the dash between subject and course code.\n' +
-                  '\`!invite\`: receive a PM with the invite link to the Megachannel.\n';
+                  '\`!invite\`: receive a PM with the invite link to the Megachannel.\n' + 
+                  '\`!nickname <desired username>\`: set your display name to <desired username>.\n';
       }
       
       sender.send(helpheader + helptext);
@@ -229,19 +230,43 @@ client.on('message', msg => {
     
     //
     // Rename yourself
-    else if (cmd == 'setname') {
-    
+    else if (cmd == 'nickname') {
+        
       if (args.length > 1) {
       
-        var nickname = message.content.substring(cmd.length + 2);
-        console.log(nickname);
+        var nickname = msg.content.substring(cmd.length + 2); 
       
         sender.setNickname(nickname)
-              .then(notificationschan.send(`${user} has changed their display name to ${nickname}!`))
+              .then(notificationschan.send(`${sender} has changed their display name to \`${nickname}\`!`))
               .catch(console.error);
         
       } else {
         msg.reply('Please check your syntax. The command usage is \`!setname <desired username>\`.')
+      }
+    
+    }
+    
+    //
+    // Rename someone else - mods only
+    else if (cmd == 'setname') {
+    
+      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+      
+        var user = msg.mentions.members.first();
+        if (!user || args.length < 3) {
+          msg.reply('Check your syntax: \`!setname <@user> <desired username>\`.');
+          return;
+        }
+        
+        var nickname = args.slice(2).join(' ');
+        user.setNickname(nickname)
+            .then(notificationschan.send(`${sender} set ${user}\'s display name to \`${nickname}\`.`))
+            .then(user.send(`${sender} set your display name to \`${nickname}\`.`))
+            .catch(console.error);
+      
+      } else {
+      
+        msg.reply('you do not have the rights to use this command.');
       }
     
     }
