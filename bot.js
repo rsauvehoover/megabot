@@ -47,8 +47,8 @@ client.on('message', msg => {
       return;
     }
             
-    var isNew = sender.roles.find('name', 'new');
-    var isConfirmed = sender.roles.find('name', 'confirmed');
+    var isNew = sender.roles.find(role => role.name === 'new');
+    var isConfirmed = sender.roles.find(role => role.name === 'confirmed');
 
     const notificationschan = findChannel(msg.guild, 'notifications');
     const welcomechan = findChannel(msg.guild, 'welcome');
@@ -99,7 +99,8 @@ client.on('message', msg => {
                   '\`!nickname <desired username>\`: set your display name to <desired username>.\n';
       }
       
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+      if ((sender.roles.find(role => role.name === modrole)) || 
+          (sender.roles.find(role => role.name === adminrole))) {
         helpmod = '\n**Mod Commands**:\n\n' +
                   '\`!cap <@user>\`: Dunce Cap the mentioned @user.\n' +
                   '\`!uncap <@user>\`: Remove the Dunce Cap from the mentioned @user.\n' + 
@@ -144,7 +145,7 @@ client.on('message', msg => {
           }
           
           // Has role - remove it
-          if (sender.roles.find('name', role)) {
+          if (sender.roles.find(role => role.name === role)) {
           
             sender.removeRole(findRole(msg.guild, role))
               .then(sender.send(`The ${cmd} '${role}' was removed. You will no longer be notified when \`@${role}\` is mentioned.`))
@@ -242,7 +243,7 @@ client.on('message', msg => {
         
       if (args.length > 1) {
       
-        if (sender.roles.find('name', adminrole)) {
+        if (sender.roles.find(role => role.name === adminrole)) {
           msg.reply('Admins must change their names manually.');
           return;
         }
@@ -263,7 +264,8 @@ client.on('message', msg => {
     // Rename someone else - mods only
     else if (cmd == 'setname') {
     
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+      if ((sender.roles.find(role => role.name === modrole)) || 
+          (sender.roles.find(role => role.name === adminrole))) {
       
         var user = msg.mentions.members.first();
         if (!user || args.length < 3) {
@@ -271,7 +273,7 @@ client.on('message', msg => {
           return;
         }
         
-        if (user.roles.find('name', adminrole)) {
+        if (user.roles.find(role => role.name === adminrole)) {
           msg.reply('You cannot set an admin\'s username.');
           return;
         }
@@ -297,7 +299,7 @@ client.on('message', msg => {
       var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
 
-      if (user && user.roles.find('name', adminrole)) {
+      if (user && user.roles.find(role => role.name === adminrole)) {
         sender.addRole(duncerole)
               .then(console.log(`${sender} attempted to cap the Admin!`))
               .then(sender.send('You have been dunce capped for attempting to dunce cap the server admin. While you are dunce capped, you will not be able to send messages, but you will be able to add reactions to other users\' messages. Your dunce cap will wear off after a certain amount of time.'))
@@ -309,7 +311,8 @@ client.on('message', msg => {
         
       }
     
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+      if ((sender.roles.find(role => role.name === modrole)) || 
+          (sender.roles.find(role => role.name === adminrole))) {
         
         // Mod but command incorrect
         if (!user) {
@@ -360,7 +363,8 @@ client.on('message', msg => {
       var duncerole = sender.guild.roles.find(role => 
                                       role.name.split(' ').includes('Dunce'));
     
-      if ((sender.roles.find('name', modrole)) || (sender.roles.find('name', adminrole))) {
+      if ((sender.roles.find(role => role.name === modrole)) || 
+          (sender.roles.find(role => role.name === adminrole))) {
 
         // Mod but command incorrect
         if (!user) {
